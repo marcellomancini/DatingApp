@@ -43,8 +43,6 @@ namespace DatingApp.API.Controllers
         [HttpPost(nameof(Login))]
         public async Task<IActionResult> Login(Credentials credentials)
         {
-            //validate request          
-
             var user = await _authRepo.Login(credentials.UserName, credentials.Password);
 
             if (user == null)
