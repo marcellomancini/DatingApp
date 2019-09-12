@@ -1,15 +1,15 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
  <div class="container">
-  <a class="navbar-brand" href="#">Dating App</a>    
+  <a class="navbar-brand" routerLink="/home" routerLinkActive='active'>Dating App</a>    
   <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link" href="#" *ngIf="loggedIn">Matches </a>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/members" *ngIf="loggedIn" routerLinkActive='active'>Matches </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" *ngIf="loggedIn" href="#">Lists</a>
+      <a class="nav-link" *ngIf="loggedIn" routerLink="/lists" routerLinkActive='active'>Lists</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#"  *ngIf="loggedIn"  >Messages</a>
+      <a class="nav-link" routerLink="/messages"  *ngIf="loggedIn"   routerLinkActive='active'>Messages</a>
     </li>    
      
   </ul>

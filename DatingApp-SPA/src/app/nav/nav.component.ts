@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { AlertifyService } from '../services/alertify.service';
 
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',

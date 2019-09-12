@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { AlertifyService } from '../services/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,8 @@ import { AlertifyService } from '../services/alertify.service';
 export class LoginComponent implements OnInit {
   model: any = {};
   constructor(private authService: AuthService,
-              private alertService: AlertifyService) { }
+              private alertService: AlertifyService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -20,18 +22,20 @@ export class LoginComponent implements OnInit {
   }
 
   get userName(): string {
- 
+
     const res = this.authService.decodedToken;
-    if(res) {
-     return res.unique_name as string;
+    if (res) {
+      return res.unique_name as string;
     }
     return '';
   }
 
   login() {
-    this.authService.login(this.model).subscribe(next => {
-      this.alertService.success('Logged in successfully');
-    },
+    this.authService.login(this.model).subscribe(
+      next => {
+        this.alertService.success('Logged in successfully');
+        this.router.navigate(['/members']);
+      },
       error => {
         this.alertService.error(error);
       }
@@ -42,5 +46,6 @@ export class LoginComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this.alertService.message('logged out');
+    this.router.navigate(['/members']);
   }
 }
