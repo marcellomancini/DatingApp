@@ -25,6 +25,10 @@ import { environment } from 'src/environments/environment';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './resolvers/member-detail.resolver';
 import { UserService } from './services/User.service';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResolver } from './resolvers/member-edit.resolver';
+import { AuthGuard } from './guards/auth.guard';
+import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
 
 export class CustomHammerConfig extends HammerGestureConfig {
    overrides = {
@@ -44,7 +48,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
       ListsComponent,
       MessagesComponent,
       MemberCardComponent,
-      MemberDetailComponent
+      MemberDetailComponent,
+      MemberEditComponent
    ],
    imports: [
       BrowserModule,
@@ -64,11 +69,14 @@ export class CustomHammerConfig extends HammerGestureConfig {
    ],
    providers: [
       AuthService,
+      AuthGuard,
+      PreventUnsavedChangesGuard,
       UserService,
       ErrorInterceptorProvider,
       AlertifyService,
       MemberDetailResolver,
-      {provide:HAMMER_GESTURE_CONFIG, useClass:CustomHammerConfig}
+      MemberEditResolver,
+      {provide: HAMMER_GESTURE_CONFIG, useClass:CustomHammerConfig}
    ],
    bootstrap: [
       AppComponent
