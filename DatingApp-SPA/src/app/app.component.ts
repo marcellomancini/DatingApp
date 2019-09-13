@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AppComponent implements OnInit {
 
   jwtHelper = new JwtHelperService();
-
-
+ 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {

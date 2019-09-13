@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl:'http://localhost:4567/api/'
+  domain: 'localhost:4567',
+  get apiDomain(): string  {return this.domain + '/api'; },
+  get apiRootUrl(): string  {return 'http://' + this.domain; },
+  get apiUrl(): string {  return this.apiRootUrl + '/api/'; }
 };
 
 /*
