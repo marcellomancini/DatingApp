@@ -35,7 +35,7 @@ namespace DatingApp.API.Data
             return user;
         }
 
-        public async Task<bool> SavaAll()
+        public async Task<bool> SaveAll()
         {
             return await _ctx.SaveChangesAsync() > 0;
         }
