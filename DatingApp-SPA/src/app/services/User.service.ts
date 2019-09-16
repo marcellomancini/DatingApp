@@ -23,6 +23,12 @@ export class UserService {
   }
 
   updateUser(id: number, user: User) {
-     return this.http.put(this.baseUrl + '/' + id, user);
+    return this.http.put(this.baseUrl + '/' + id, user);
+  }
+
+
+  setMainPhoto(userId: number, photoId: number) {
+    const url = this.baseUrl + '/' + userId + '/photos/' + photoId + '/setMain';
+    return this.http.post(url, {});
   }
 }

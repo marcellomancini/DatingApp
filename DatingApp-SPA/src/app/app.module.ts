@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { AppComponent } from './app.component';
-
+import { FileUploadModule } from 'ng2-file-upload';
 import { from } from 'rxjs';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './services/auth.service';
@@ -29,6 +29,8 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './resolvers/member-edit.resolver';
 import { AuthGuard } from './guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+
 
 export class CustomHammerConfig extends HammerGestureConfig {
    overrides = {
@@ -49,12 +51,14 @@ export class CustomHammerConfig extends HammerGestureConfig {
       MessagesComponent,
       MemberCardComponent,
       MemberDetailComponent,
-      MemberEditComponent
+      MemberEditComponent,
+      PhotoEditorComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
+      FileUploadModule,
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),
       RouterModule.forRoot(appRoutes),
@@ -76,7 +80,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
       AlertifyService,
       MemberDetailResolver,
       MemberEditResolver,
-      {provide: HAMMER_GESTURE_CONFIG, useClass:CustomHammerConfig}
+      { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
    ],
    bootstrap: [
       AppComponent

@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +19,10 @@ namespace DatingApp.API.Controllers
     {
         private readonly IAuthRepository _authRepo;
         private readonly IConfiguration _config;
-        public AuthController(IAuthRepository authRepo, IConfiguration config)
+        private readonly IMapper _mapper;
+        public AuthController(IAuthRepository authRepo, IConfiguration config, IMapper mapper)
         {
+            _mapper = mapper;
             _config = config;
             _authRepo = authRepo;
         }
@@ -58,23 +61,26 @@ namespace DatingApp.API.Controllers
 
             var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Token").Value));
 
-            var sc = new SigningCredentials(key,SecurityAlgorithms.HmacSha512Signature);
+            var sc = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var std=new SecurityTokenDescriptor
+            var std = new SecurityTokenDescriptor
             {
-                Subject=new ClaimsIdentity(claims),
-                Expires=DateTime.Now.AddDays(1),
-                SigningCredentials=sc
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = sc
             };
-            
+
             var jwtSTH = new JwtSecurityTokenHandler();
             var token = jwtSTH.CreateToken(std);
-
+            var userListItem = _mapper.Map<UserListItem>(user);
             return Ok
             (
-                new{token=jwtSTH.WriteToken(token)}
-            );
-        
+                new
+                {
+                    token = jwtSTH.WriteToken(token) ,
+                    user = userListItem
+            });
+
 
         }
     }

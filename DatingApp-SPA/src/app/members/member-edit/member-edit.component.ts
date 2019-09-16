@@ -39,9 +39,13 @@ export class MemberEditComponent implements OnInit {
         this.alertifyService.success('Profile updated successfully');
         this.editForm.reset(this.user);
       },
-      error => {
-        this.alertifyService.error(error);
-      });
+        error => {
+          this.alertifyService.error(error);
+        });
+  }
+
+  updateMainPhoto(photoUrl: string) {
+    this.user.photoUrl = photoUrl;
   }
 
 

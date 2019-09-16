@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   model: any = {};
   constructor(private authService: AuthService,
-              private alertService: AlertifyService,
-              private router: Router) { }
+    private alertService: AlertifyService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -45,6 +45,9 @@ export class LoginComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authService.decodedToken = null;
+    this.authService.currentUser = null;
     this.alertService.message('logged out');
     this.router.navigate(['/members']);
   }

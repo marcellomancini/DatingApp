@@ -1,4 +1,5 @@
 <div class="dropdown" *ngIf="loggedIn" dropdown>
+  <span class="mr-1"><img src="{{authService.currentUser.photoUrl}}" alt="{{authService.currentUser.knownAs}}"></span>
   <a class="dropdown-toggle text-light"  dropdownToggle>
     Welcome {{userName | titlecase}}
   </a>
