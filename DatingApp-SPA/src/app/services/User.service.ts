@@ -31,4 +31,9 @@ export class UserService {
     const url = this.baseUrl + '/' + userId + '/photos/' + photoId + '/setMain';
     return this.http.post(url, {});
   }
+
+  deletePhoto(userId: number, photoId: number) {
+    const url = this.baseUrl + '/' + userId + '/photos/' + photoId;
+    return this.http.delete(url);
+  }
 }

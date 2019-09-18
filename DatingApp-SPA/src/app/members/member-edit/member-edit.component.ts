@@ -19,17 +19,19 @@ export class MemberEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
+  photoUrl: string;
   user: User;
 
   constructor(private route: ActivatedRoute,
-              private alertifyService: AlertifyService,
-              private userService: UserService,
-              private authService: AuthService) { }
+    private alertifyService: AlertifyService,
+    private userService: UserService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       // tslint:disable-next-line: no-string-literal
       this.user = data['user'];
+      this.authService.currentPhotoUrl.subscribe(url => this.photoUrl = url);
     });
   }
 

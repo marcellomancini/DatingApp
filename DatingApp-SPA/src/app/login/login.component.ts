@@ -10,11 +10,14 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   model: any = {};
-  constructor(private authService: AuthService,
+  photoUrl: string;
+  constructor(
+    private authService: AuthService,
     private alertService: AlertifyService,
     private router: Router) { }
 
   ngOnInit() {
+    this.authService.currentPhotoUrl.subscribe(url => this.photoUrl = url)
   }
 
   get loggedIn(): boolean {
